@@ -31,6 +31,9 @@ namespace FeedViewer
 
         private void OnUserNameTapped(object sender, EventArgs e)
         {
+            if (new Random().Next() % 5 == 0)
+                throw new InvalidOperationException("This should be tracked.");
+
             var userName = (Label)sender;
             var feedItem = (FeedItem)userName.BindingContext;
             Navigation.PushAsync(new ContentPage
