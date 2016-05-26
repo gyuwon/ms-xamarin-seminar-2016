@@ -6,7 +6,11 @@ namespace FeedViewer
     {
         public App()
         {
-            MainPage = new NavigationPage(new MainPage());
+            var mainPage = new MainPage
+            {
+                FeedbackCollector = DependencyService.Get<IFeedbackCollector>()
+            };
+            MainPage = new NavigationPage(mainPage);
         }
     }
 }

@@ -17,6 +17,8 @@ namespace FeedViewer
             InitializeComponent();
         }
 
+        public IFeedbackCollector FeedbackCollector { get; set; }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -29,14 +31,11 @@ namespace FeedViewer
             _feed.ItemsSource = JsonConvert.DeserializeObject<FeedItem[]>(json);
         }
 
-        private void OnUserNameTapped(object sender, EventArgs e)
+        private async void OnUserNameTapped(object sender, EventArgs e)
         {
-            if (new Random().Next() % 5 == 0)
-                throw new InvalidOperationException("This should be tracked.");
-
             var userName = (Label)sender;
             var feedItem = (FeedItem)userName.BindingContext;
-            Navigation.PushAsync(new ContentPage
+            await Navigation.PushAsync(new ContentPage
             {
                 Content = new StackLayout
                 {
@@ -53,6 +52,9 @@ namespace FeedViewer
                     }
                 }
             });
+
+            if (new Random().Next() % 5 == 0)
+                FeedbackCollector?.ShowFeedbackView();
         }
     }
 }
