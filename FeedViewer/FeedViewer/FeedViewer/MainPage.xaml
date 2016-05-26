@@ -2,5 +2,39 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FeedViewer.MainPage">
-  <Label Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ListView x:Name="_feed"
+            HasUnevenRows="True">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Horizontal">
+              <Image Source="{Binding ProfilePictureUri}"
+                     WidthRequest="50"
+                     HeightRequest="50" />
+              
+              <Label Text="{Binding UserName}">
+                <Label.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="OnUserNameTapped" />
+                </Label.GestureRecognizers>
+              </Label>
+            </StackLayout>
+
+            <Image Grid.Row="1"
+                   Source="{Binding PostPictureUri}"
+                   HorizontalOptions="Fill" />
+
+            <Label Grid.Row="2"
+                   Text="{Binding Caption}" />
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
 </ContentPage>
