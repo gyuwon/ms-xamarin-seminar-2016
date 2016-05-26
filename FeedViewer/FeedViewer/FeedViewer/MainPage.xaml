@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:FeedViewer;assembly=FeedViewer"
              NavigationPage.HasNavigationBar="False"
              x:Class="FeedViewer.MainPage">
   <ContentPage.Padding>
@@ -23,12 +24,9 @@
               <Image Source="{Binding ProfilePictureUri}"
                      WidthRequest="50"
                      HeightRequest="50" />
-              
-              <Label Text="{Binding UserName}">
-                <Label.GestureRecognizers>
-                  <TapGestureRecognizer Tapped="OnUserNameTapped" />
-                </Label.GestureRecognizers>
-              </Label>
+
+              <app:ButtonLabel Text="{Binding UserName}"
+                               Tapped="OnUserNameTapped" />
             </StackLayout>
 
             <Image Grid.Row="1"
